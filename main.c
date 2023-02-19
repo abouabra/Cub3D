@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:30:12 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 16:36:15 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:39:22 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int	main(int ac, char **av)
 {
 	t_vars *vars;
-	(void)ac;
 	(void)av;
-	
+	if (ac != 2)
+		return (0);
 	vars = my_alloc(sizeof(t_vars));
 	if(!vars)
 		custom_exit(0);
+	if (!map_check(vars, av[1]))
+		return (0);
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, 1024, 512, "cub3d");
 	mlx_hook(vars->win, ON_KEYDOWN, 1L << 0, key_movement, vars);
