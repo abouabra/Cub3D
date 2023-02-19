@@ -1,10 +1,11 @@
-SRC =  main.c key_movement.c map_check.c info_list_stuff.c map_operation.c draw_map.c
+SRC =  main.c key_movement.c map_check.c info_list_stuff.c map_operation.c draw_map.c \
+		move_player.c update_frames.c rotate_player.c
 
 OSRC=$(SRC:.c=.o)
 
 NAME = cub3d
 CFLAGS= -Wall -Wextra -Werror
-MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit 
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 INCLUDE = -I. -I libft
 
 RED = \033[1;31m

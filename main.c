@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:30:12 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 21:57:29 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:05:15 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 	
 	mlx_hook(vars->win, ON_KEYDOWN, 1L << 0, key_movement, vars);
 	mlx_hook(vars->win, ON_DESTROY, 1L << 0, close_win, vars);
-	
+	mlx_loop_hook(vars->mlx, update_frames, vars);
 	mlx_loop(vars->mlx);
 	custom_exit(0);
 	return (0);

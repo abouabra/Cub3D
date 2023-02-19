@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 18:58:49 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 20:56:11 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:03:15 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ int	map_phase_3(t_vars *vars)
 		j = x_start;
 		while (j <= x_end)
 		{
+			if(vars->map[i][j] == 'N')
+			{
+				vars->player_pos[X] = j*64;
+				vars->player_pos[Y] = i*64;
+			}
 			if ((j == x_start || j == x_end) &&  vars->map[i][j] != '1')
 			{
 				ft_dprintf(1, "Error\nMap is not surrounded by walls\n");

@@ -6,12 +6,11 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:31:17 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 16:34:30 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:50:10 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/get_next_line.h"
 
 int	close_win(t_vars *vars)
 {
@@ -25,19 +24,27 @@ int	key_movement(int keycode, t_vars *vars)
 {
 	if (keycode == 13)
 	{
-		// move_player_up(vars);
+		move_player_up(vars);
 	}
 	if (keycode == 0)
 	{
-		// move_player_left(vars);
+		move_player_left(vars);
 	}
 	if (keycode == 1)
 	{
-		// move_player_down(vars);
+		move_player_down(vars);
 	}
 	if (keycode == 2)
 	{
-		// move_player_right(vars);
+		move_player_right(vars);
+	}
+	if (keycode == 124)
+	{
+		rotate_player_left(vars);
+	}
+	if (keycode == 123)
+	{
+		rotate_player_right(vars);
 	}
 	if (keycode == 53)
 		close_win(vars);

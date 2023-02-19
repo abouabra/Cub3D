@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/02/19 21:44:55 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:27:53 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <fcntl.h>
 # include <time.h>
 #include <stdio.h>
+#include <math.h>
+
+# define PI 3.1415926535
 
 typedef struct t_info
 {
@@ -33,10 +36,14 @@ typedef struct t_vars
 	char **map;
 	char **full_map;
 	int number_of_lines;
-	
 	void *imgs[2];
-	t_info *info_head;
+	int player_pos[2];
 	
+	float pdx;
+	float pdy;
+	float pa;
+	
+	t_info *info_head; 
 }	t_vars;
 
 enum
@@ -49,7 +56,11 @@ enum
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
-
+enum
+{
+	X,
+	Y
+};
 enum
 {
 	Background,
@@ -67,5 +78,14 @@ void	ft_info_clear(t_info **head);
 char	*get_info_data(t_vars *vars, char *id);
 
 void draw_map(t_vars *vars);
+void	move_player_up(t_vars *vars);
+void	move_player_down(t_vars *vars);
+void	move_player_left(t_vars *vars);
+void	move_player_right(t_vars *vars);
+void	rotate_player_right(t_vars *vars);
+void	rotate_player_left(t_vars *vars);
+
+void print_stuff(t_vars *vars);
+int	update_frames(t_vars *vars);
 
 #endif
