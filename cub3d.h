@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/02/19 18:12:48 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 21:44:55 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct t_vars
 	char **map;
 	char **full_map;
 	int number_of_lines;
+	
+	void *imgs[2];
 	t_info *info_head;
 	
 }	t_vars;
@@ -48,6 +50,12 @@ enum
 	ON_DESTROY = 17
 };
 
+enum
+{
+	Background,
+	Player
+};
+
 int	map_check(t_vars *vars, char *map_name);
 int	map_operation(t_vars *vars, char *map_name);
 int	close_win(t_vars *vars);
@@ -57,5 +65,7 @@ t_info	*ft_last_info(t_info *node);
 void	add_info_in_back(t_info **head, t_info *node);
 void	ft_info_clear(t_info **head);
 char	*get_info_data(t_vars *vars, char *id);
+
+void draw_map(t_vars *vars);
 
 #endif

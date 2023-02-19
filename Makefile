@@ -1,4 +1,4 @@
-SRC =  main.c key_movement.c map_check.c info_list_stuff.c map_operation.c
+SRC =  main.c key_movement.c map_check.c info_list_stuff.c map_operation.c draw_map.c
 
 OSRC=$(SRC:.c=.o)
 
