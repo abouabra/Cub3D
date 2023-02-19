@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 22:50:41 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 23:04:08 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void draw_line(t_vars *vars)
     int x0 = vars->player_pos[X] + 16;
     int y0 = vars->player_pos[Y] + 16;
 
-    int x1 = x0 + vars->pdx; // x-coordinate of the end point of the line
-    int y1 = y0 + vars->pdy; // y-coordinate of the end point of the line
+    int x1 = x0 + vars->pdx;
+    int y1 = y0 + vars->pdy;
 
     int x = x0;
     int y = y0;
