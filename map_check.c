@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:28:41 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 18:23:36 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:43:24 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ int	map_check(t_vars *vars, char *map_name)
 		return (0);
 
 
-	t_info *node;
-	node = vars->info_head;
-	while(node)
-	{
-		ft_dprintf(1,"%s: %s\n",node->id,get_info_data(vars,node->id));
-		node = node->next;
-	}
-	int i;
-	i= -1;
-	while(vars->map[++i])
-		ft_dprintf(1,"%s\n",vars->map[i]);
+	// t_info *node;
+	// node = vars->info_head;
+	// while(node)
+	// {
+	// 	ft_dprintf(1,"%s: %s\n",node->id,get_info_data(vars,node->id));
+	// 	node = node->next;
+	// }
+	// int i;
+	// i= -1;
+	// while(vars->map[++i])
+	// 	ft_dprintf(1,"%s\n",vars->map[i]);
 	return (1);
 }
