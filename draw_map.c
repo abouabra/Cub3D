@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 20:23:14 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:20:50 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,21 @@ void shoot_ray(t_vars *vars)
 	float disV;
 	float vx;
 	float vy;
-	
+	float final_dis;
+	float LineH;
+	int r;
+
 	disH = 100000000;
 	disV = 100000000;
-	ra = vars->pa-DR*30;
+	ra = vars->pa-DR*(FOV/2);
 	// ra = vars->pa;
 	if(ra > 2 * PI)
 		ra -= 2 * PI;
 	else if(ra < 0)
 		ra += 2 * PI;
 	rays = 0;
-	while(rays < 60)
+	r = 0;
+	while(rays < FOV)
 	{
 		//check horizontal;
 		render_dist = 0;
@@ -198,11 +202,15 @@ void shoot_ray(t_vars *vars)
 		{
 			rx = hx;
 			ry = hy;
+			final_dis = disH;
+			vars->wall_colors[r] = 0x33cc00;
 		}
 		else
 		{
 			rx = vx;
 			ry = vy;
+			final_dis = disV;
+			vars->wall_colors[r] = 0x339900;
 		}
 		if(rx >= 0 && rx < vars->longest_line*64 && ry >= 0 && ry < vars->number_of_lines*64)
 			draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
@@ -213,6 +221,42 @@ void shoot_ray(t_vars *vars)
 		else if(ra < 0)
 			ra += 2 * PI;
 		rays++;
+
+
+	//draw 3d world
+		float fish_eye;
+		
+		fish_eye = vars->pa - ra;
+		if(fish_eye > 2 * PI)
+			fish_eye -= 2 * PI;
+		else if(fish_eye < 0)
+			fish_eye += 2 * PI;
+		final_dis = final_dis * cos(fish_eye);
+		LineH = (100*(vars->number_of_lines *64))/final_dis;
+		if(LineH > (vars->number_of_lines *64))
+			LineH = (vars->number_of_lines *64);
+		vars->store[r] = LineH;
+		r++;
+		// draw_line(vars, r, vars->number_of_lines * 64, r, (vars->number_of_lines * 64) + LineH, 0x00FF00);
+		// if(r > (vars->longest_line) * 64)
+		// 	r = 0;
+	}
+	r = 0;
+	int i = 0;
+	int j = 0;
+	float LineO;
+	
+	while(r < 60)
+	{
+		j = 0;
+		while(j < 30)
+		{
+			LineO = (vars->number_of_lines *64)/2 - vars->store[r]/2;
+			draw_line(vars, i+j, (vars->number_of_lines * 64)+LineO, i+j, (vars->number_of_lines * 64) + vars->store[r] + LineO, vars->wall_colors[r]);
+			j++;
+		}
+		i+= 30;
+		r++;
 	}
 }
 void draw_zabzoub(t_vars *vars)

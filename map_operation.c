@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 18:58:49 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 22:03:15 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 21:24:04 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	map_phase_3(t_vars *vars)
 {
 	int	i;
 	int	j;
-	int	z;
-	int	y;
+	// int	z;
+	// int	y;
 	int	y_end;
 	int	y_start;
 	int	x_end;
@@ -97,40 +97,40 @@ int	map_phase_3(t_vars *vars)
 				vars->player_pos[X] = j*64;
 				vars->player_pos[Y] = i*64;
 			}
-			if ((j == x_start || j == x_end) &&  vars->map[i][j] != '1')
-			{
-				ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
-				return (0);
-			}
+			// if ((j == x_start || j == x_end) &&  vars->map[i][j] != '1')
+			// {
+			// 	ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
+			// 	return (0);
+			// }
             
-			if ((i == y_start || i == y_end) && (vars->map[i][j] != '1' && vars->map[i][j] != ' '))
-			{
-				ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
-			 	return (0);
-			}
-			if (i > 0 && i < y_end)
-			{
-				char **tmp = ft_split(vars->map[i], ' ');
-				z = -1;
-				while(tmp[++z])
-				{
-					y = -1;
-					while(tmp[z][++y])
-					{
-						if((y == 0 || y == ft_strlen(tmp[z])-1) && tmp[z][y] != '1')
-						{
-							ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
-							return (0);
-						}
-					}
+			// if ((i == y_start || i == y_end) && (vars->map[i][j] != '1' && vars->map[i][j] != ' '))
+			// {
+			// 	ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
+			//  	return (0);
+			// }
+			// if (i > 0 && i < y_end)
+			// {
+			// 	char **tmp = ft_split(vars->map[i], ' ');
+			// 	z = -1;
+			// 	while(tmp[++z])
+			// 	{
+			// 		y = -1;
+			// 		while(tmp[z][++y])
+			// 		{
+			// 			if((y == 0 || y == ft_strlen(tmp[z])-1) && tmp[z][y] != '1')
+			// 			{
+			// 				ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
+			// 				return (0);
+			// 			}
+			// 		}
 					
-				}
-			}
-				if (j < ft_strlen(vars->map[i]) && j > 0 &&  vars->map[i][j] != ' ' &&  vars->map[i][j] != '1' && (vars->map[i - 1][j] == ' ' || vars->map[i + 1][j] == ' ' || !vars->map[i - 1][j] || !vars->map[i + 1][j]))
-				{
-					ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
-					return (0);
-				}
+			// 	}
+			// }
+			// 	if (j < ft_strlen(vars->map[i]) && j > 0 &&  vars->map[i][j] != ' ' &&  vars->map[i][j] != '1' && (vars->map[i - 1][j] == ' ' || vars->map[i + 1][j] == ' ' || !vars->map[i - 1][j] || !vars->map[i + 1][j]))
+			// 	{
+			// 		ft_dprintf(1, "Error\nMap is not surrounded by walls\n");
+			// 		return (0);
+			// 	}
 			j++;
 		}
 	}
