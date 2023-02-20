@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 22:20:50 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:55:16 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,14 +203,14 @@ void shoot_ray(t_vars *vars)
 			rx = hx;
 			ry = hy;
 			final_dis = disH;
-			vars->wall_colors[r] = 0x33cc00;
+			vars->wall_colors[r] = 0xaf721a;
 		}
 		else
 		{
 			rx = vx;
 			ry = vy;
 			final_dis = disV;
-			vars->wall_colors[r] = 0x339900;
+			vars->wall_colors[r] = 0x693e00;
 		}
 		if(rx >= 0 && rx < vars->longest_line*64 && ry >= 0 && ry < vars->number_of_lines*64)
 			draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
@@ -246,16 +246,16 @@ void shoot_ray(t_vars *vars)
 	int j = 0;
 	float LineO;
 	
-	while(r < 60)
+	while(r < FOV)
 	{
 		j = 0;
-		while(j < 30)
+		while(j < PIXEL_WIDTH)
 		{
 			LineO = (vars->number_of_lines *64)/2 - vars->store[r]/2;
 			draw_line(vars, i+j, (vars->number_of_lines * 64)+LineO, i+j, (vars->number_of_lines * 64) + vars->store[r] + LineO, vars->wall_colors[r]);
 			j++;
 		}
-		i+= 30;
+		i+= PIXEL_WIDTH;
 		r++;
 	}
 }
