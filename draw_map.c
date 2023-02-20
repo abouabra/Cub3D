@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 18:51:01 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:04:33 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void shoot_ray(t_vars *vars)
 	float aTan;
 	float nTan;
 	int rays;
-	int dof;
+	int render_dist;
 	int mx;
 	int my;
 	int mp;
@@ -84,12 +84,16 @@ void shoot_ray(t_vars *vars)
 	
 	disH = 100000000;
 	disV = 100000000;
-	ra = vars->pa;
+	ra = vars->pa-DR*30;
+	if(ra > 2 * PI)
+		ra -= 2 * PI;
+	else if(ra < 0)
+		ra += 2 * PI;
 	rays = 0;
 	while(rays < 1)
 	{
 		//check horizontal;
-		dof = 0;
+		render_dist = 0;
 		aTan = -1/tan(ra);
 		if(ra > PI)
 		{
@@ -109,9 +113,9 @@ void shoot_ray(t_vars *vars)
 		{
 			rx = vars->player_pos[X];
 			ry = vars->player_pos[Y];
-			dof = 8;
+			render_dist = 8;
 		}
-		while(dof < 8)
+		while(render_dist < 8)
 		{
 			mx = (int) (rx) >> 6;
 			my = (int) (ry) >> 6;
@@ -126,13 +130,13 @@ void shoot_ray(t_vars *vars)
 				hx = rx;
 				hy  =ry;
 				disH = calc_dist(vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry);
-				dof = 8;
+				render_dist = 8;
 			}
 			else
 			{
 				rx += xo;
 				ry += yo;
-				dof += 1;
+				render_dist += 1;
 			}
 		}
 		// draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0x00FF00);
@@ -141,7 +145,7 @@ void shoot_ray(t_vars *vars)
 
 
 		//check vertical;
-		dof = 0;
+		render_dist = 0;
 		nTan = -tan(ra);
 		if(ra > P2 && ra <P3)
 		{
@@ -161,16 +165,15 @@ void shoot_ray(t_vars *vars)
 		{
 			rx = vars->player_pos[Y];
 			ry = vars->player_pos[X];
-			dof = 8;
+			render_dist = 8;
 		}
-		while(dof < 8)
+		while(render_dist < 8)
 		{
 			mx = (int) (rx) >> 6;
 			my = (int) (ry) >> 6;
 	
 			mp = my*(vars->longest_line-1)+mx;
 			ms = (vars->number_of_lines -1) * (vars->longest_line-1);
-			dprintf(1, "MX: %d MY: %d  %d %d\n",mx,my,vars->number_of_lines,vars->longest_line);
 			if(mx >= 0 && mx < vars->longest_line && my >= 0 && my < vars->number_of_lines && vars->map[my][mx] == '1')
 			{
 				//hit  a wall;
@@ -178,28 +181,38 @@ void shoot_ray(t_vars *vars)
 				vx = rx;
 				vy  =ry;
 				disV = calc_dist(vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry);
-				dof = 8;
+				render_dist = 8;
 			}
 			else
 			{
 				rx += xo;
 				ry += yo;
-				dof += 1;
+				render_dist += 1;
 			}
 		}
 		rays++;
 	}
-	// if(disH < disV)
-	// {
-	// 	rx = hx;
-	// 	ry = hy;
-	// }
-	// else
-	// {
-	// 	rx = vx;
-	// 	ry = vy;
-	// }
-	// draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
+	if(disH < disV)
+	{
+		rx = hx;
+		ry = hy;
+	}
+	else
+	{
+		rx = vx;
+		ry = vy;
+	}
+	draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
+}
+void draw_zabzoub(t_vars *vars)
+{
+    int x0 = vars->player_pos[X] + 16;
+    int y0 = vars->player_pos[Y] + 16;
+
+    int x1 = x0 + vars->pdx;
+    int y1 = y0 + vars->pdy;
+
+	draw_line(vars,x0,y0,x1,y1,0xFF0000);
 }
 
 void print_stuff(t_vars *vars)
@@ -215,7 +228,7 @@ void print_stuff(t_vars *vars)
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[Player], vars->player_pos[X], vars->player_pos[Y]);
 		}
 	}
-	// draw_zabzoub(vars);
+	draw_zabzoub(vars);
 	shoot_ray(vars);
 }
 
