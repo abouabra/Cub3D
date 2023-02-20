@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/02/20 22:56:46 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:03:32 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # define RENDER_D 5120
 # define FOV 60
 # define PIXEL_WIDTH 30
-// # define DR 0.0174533
-# define DR 0.011
+# define DR 0.0174533
 # define PI 3.1415926535
 # define P2 PI / 2
 # define P3 3 * (PI / 2)
