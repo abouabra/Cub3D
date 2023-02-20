@@ -6,11 +6,12 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:28:41 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 21:56:41 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:36:22 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft/get_next_line.h"
 
 int is_identifier(char *line)
 {
@@ -74,12 +75,19 @@ void get_data(t_vars *vars, char *map_name)
 
 int	map_check(t_vars *vars, char *map_name)
 {
+	int i;
+	
 	get_data(vars, map_name);
 	if (!vars->map)
 		return (0);
 	if (!map_operation(vars, map_name))
 		return (0);
-
+	i = -1;
+	while(vars->map[++i])
+	{
+		if(ft_strlen(vars->map[i]) > vars->longest_line)
+			vars->longest_line = ft_strlen(vars->map[i]);
+	}
 
 	// t_info *node;
 	// node = vars->info_head;

@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/02/19 22:27:53 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:51:18 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <time.h>
-#include <stdio.h>
 #include <math.h>
 
 # define PI 3.1415926535
+# define P2 PI/2
+# define P3 3*PI/2
 
 typedef struct t_info
 {
@@ -36,6 +37,7 @@ typedef struct t_vars
 	char **map;
 	char **full_map;
 	int number_of_lines;
+	int longest_line;
 	void *imgs[2];
 	int player_pos[2];
 	
