@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:30:12 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 19:05:18 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 19:40:15 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	main(int ac, char **av)
 		return (0);
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, vars->longest_line*64, vars->number_of_lines* 64, "cub3d");
-	vars->pa = P3;
+	
+	// vars->pa = P3;
+	// vars->pdx = cos(vars->pa)*100;
+	// vars->pdy = sin(vars->pa)*100;
+	
 	draw_map(vars);
 	
 	mlx_hook(vars->win, ON_KEYDOWN, 1L << 0, key_movement, vars);

@@ -20,7 +20,7 @@ $(NAME) : $(OSRC)
 	@make -C libft
 	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(INCLUDE) $(OSRC) libft/libft.a -o $@
 
-%.o : %.c
+%.o : %.c cub3d.h
 	@printf "hana kan compili f$(GREEN) $< $(RESET) \n"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $<
 

@@ -6,13 +6,14 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 19:04:33 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 20:23:14 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 #include <stdio.h>
+
 
 void draw_line(t_vars *vars, int px, int py, int ex, int ey, int color)
 {
@@ -85,12 +86,13 @@ void shoot_ray(t_vars *vars)
 	disH = 100000000;
 	disV = 100000000;
 	ra = vars->pa-DR*30;
+	// ra = vars->pa;
 	if(ra > 2 * PI)
 		ra -= 2 * PI;
 	else if(ra < 0)
 		ra += 2 * PI;
 	rays = 0;
-	while(rays < 1)
+	while(rays < 60)
 	{
 		//check horizontal;
 		render_dist = 0;
@@ -113,24 +115,24 @@ void shoot_ray(t_vars *vars)
 		{
 			rx = vars->player_pos[X];
 			ry = vars->player_pos[Y];
-			render_dist = 8;
+			render_dist = RENDER_D;
 		}
-		while(render_dist < 8)
+		while(render_dist < RENDER_D)
 		{
 			mx = (int) (rx) >> 6;
 			my = (int) (ry) >> 6;
 	
 			mp = my*(vars->longest_line-1)+mx;
 			ms = (vars->number_of_lines -1) * (vars->longest_line-1);
+			// dprintf(1, "1 MX: %d MY: %d  %d %d\n",mx,my,vars->number_of_lines,vars->longest_line);
 			if(mx >= 0 && mx < vars->longest_line && my >= 0 && my < vars->number_of_lines && vars->map[my][mx] == '1')
 			{
 				//hit  a wall;
-				// dprintf(1, "MX: %d MY: %d  %d %d\n",mx,my,vars->number_of_lines,vars->longest_line);
 				
 				hx = rx;
 				hy  =ry;
 				disH = calc_dist(vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry);
-				render_dist = 8;
+				render_dist = RENDER_D;
 			}
 			else
 			{
@@ -139,7 +141,8 @@ void shoot_ray(t_vars *vars)
 				render_dist += 1;
 			}
 		}
-		// draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0x00FF00);
+		// if(rx >= 0 && rx < vars->longest_line*64 && ry >= 0 && ry < vars->number_of_lines*64)
+		// 	draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0x00FF00);
 
 
 
@@ -163,17 +166,18 @@ void shoot_ray(t_vars *vars)
 		}
 		if(ra == PI || ra == 0)
 		{
-			rx = vars->player_pos[Y];
-			ry = vars->player_pos[X];
-			render_dist = 8;
+			rx = vars->player_pos[X];
+			ry = vars->player_pos[Y];
+			render_dist = RENDER_D;
 		}
-		while(render_dist < 8)
+		while(render_dist < RENDER_D)
 		{
 			mx = (int) (rx) >> 6;
 			my = (int) (ry) >> 6;
 	
 			mp = my*(vars->longest_line-1)+mx;
 			ms = (vars->number_of_lines -1) * (vars->longest_line-1);
+			// dprintf(1, "2 MX: %d MY: %d  %d %d\n",mx,my,vars->number_of_lines,vars->longest_line);
 			if(mx >= 0 && mx < vars->longest_line && my >= 0 && my < vars->number_of_lines && vars->map[my][mx] == '1')
 			{
 				//hit  a wall;
@@ -181,7 +185,7 @@ void shoot_ray(t_vars *vars)
 				vx = rx;
 				vy  =ry;
 				disV = calc_dist(vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry);
-				render_dist = 8;
+				render_dist = RENDER_D;
 			}
 			else
 			{
@@ -190,19 +194,26 @@ void shoot_ray(t_vars *vars)
 				render_dist += 1;
 			}
 		}
+		if(disH < disV)
+		{
+			rx = hx;
+			ry = hy;
+		}
+		else
+		{
+			rx = vx;
+			ry = vy;
+		}
+		if(rx >= 0 && rx < vars->longest_line*64 && ry >= 0 && ry < vars->number_of_lines*64)
+			draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
+		
+		ra += DR;
+		if(ra > 2 * PI)
+			ra -= 2 * PI;
+		else if(ra < 0)
+			ra += 2 * PI;
 		rays++;
 	}
-	if(disH < disV)
-	{
-		rx = hx;
-		ry = hy;
-	}
-	else
-	{
-		rx = vx;
-		ry = vy;
-	}
-	draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
 }
 void draw_zabzoub(t_vars *vars)
 {
@@ -228,7 +239,7 @@ void print_stuff(t_vars *vars)
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[Player], vars->player_pos[X], vars->player_pos[Y]);
 		}
 	}
-	draw_zabzoub(vars);
+	// draw_zabzoub(vars);
 	shoot_ray(vars);
 }
 

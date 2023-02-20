@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/02/20 19:00:51 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/02/20 20:23:06 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <time.h>
 #include <math.h>
 
+# define RENDER_D 5120
 # define DR 0.0174533
 # define PI 3.1415926535
 # define P2 PI/2
