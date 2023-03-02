@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/03/02 19:03:42 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:13:00 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,8 +238,6 @@ void print_stuff(t_vars *vars)
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->imgs[Player], vars->player_pos[X], vars->player_pos[Y]);
 		}
 	}
-	// draw_zabzoub(vars);
-	shoot_ray(vars);
 }
 
 void draw_map(t_vars *vars)
