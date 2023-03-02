@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 16:30:12 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 21:32:54 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:00:47 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,25 @@ int	main(int ac, char **av)
 		custom_exit(0);
 	if (!map_check(vars, av[1]))
 		return (0);
+	vars->main_img = my_alloc(sizeof(t_data));
+	if(!vars->main_img)
+		custom_exit(0);
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, vars->longest_line*64, (vars->number_of_lines* 64)*2, "cub3d");
-	
+	vars->main_img->img = mlx_new_image(vars->mlx, vars->longest_line*64, (vars->number_of_lines* 64)*2);
+	vars->main_img->addr = mlx_get_data_addr(vars->main_img->img,
+		&vars->main_img->bits_per_pixel
+		,&vars->main_img->line_length, &vars->main_img->endian);
+
+	// int i = -1;
+	// while(++i < 50)
+	// {
+	// 	int j = -1;
+	// 	while(++j < 50)
+	// 	{
+	// 		my_mlx_pixel_put(vars->main_img, j, i, 0x00FF0000);
+	// 	}
+	// }
 	// vars->pa = P3;
 	// vars->pdx = cos(vars->pa)*100;
 	// vars->pdy = sin(vars->pa)*100;

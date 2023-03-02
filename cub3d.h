@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/02/20 23:03:32 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:01:39 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,21 @@
 # include <time.h>
 
 # define RENDER_D 5120
-# define FOV 60
-# define PIXEL_WIDTH 30
-# define DR 0.0174533
+# define FOV 120
+# define PIXEL_WIDTH 15
+# define DR 0.011
+// # define DR 0.0174533
 # define PI 3.1415926535
 # define P2 PI / 2
 # define P3 3 * (PI / 2)
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct t_info
 {
@@ -43,14 +52,15 @@ typedef struct t_vars
 	int				number_of_lines;
 	int				longest_line;
 	void			*imgs[2];
-	int				player_pos[2];
-
+	int				player_pos[2];	
 	float			pdx;
 	float			pdy;
 	float			pa;
 	float			store[FOV];
 	float			wall_colors[FOV];
 
+	t_data			*main_img;
+	
 	t_info			*info_head;
 }					t_vars;
 
@@ -75,6 +85,8 @@ enum
 	Player
 };
 
+void draw_line(t_vars *vars, int px, int py, int ex, int ey, int color);
+
 int					map_check(t_vars *vars, char *map_name);
 int					map_operation(t_vars *vars, char *map_name);
 int					close_win(t_vars *vars);
@@ -95,5 +107,7 @@ void				rotate_player_left(t_vars *vars);
 
 void				print_stuff(t_vars *vars);
 int					update_frames(t_vars *vars);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void shoot_ray(t_vars *vars);
 
 #endif

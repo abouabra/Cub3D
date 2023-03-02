@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 22:55:16 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:03:42 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,6 @@
 #include <math.h>
 #include <stdio.h>
 
-
-void draw_line(t_vars *vars, int px, int py, int ex, int ey, int color)
-{
-    int x0 = px; // x-coordinate of the starting point
-    int y0 = py; // y-coordinate of the starting point
-    int x1 = ex; // x-coordinate of the end point
-    int y1 = ey; // y-coordinate of the end point
-
-    int x = x0;
-    int y = y0;
-
-    int dx1 = abs(x1 - x0);
-    int dy1 = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = dx1 - dy1;
-
-    while (x != x1 || y != y1)
-    {
-        mlx_pixel_put(vars->mlx, vars->win, x, y, color);
-
-        int e2 = 2 * err;
-        if (e2 > -dy1)
-        {
-            err -= dy1;
-            x += sx;
-        }
-        if (e2 < dx1)
-        {
-            err += dx1;
-            y += sy;
-        }
-    }
-}
 
 float calc_dist(float px, float py, float dx, float dy)
 {
@@ -128,7 +94,6 @@ void shoot_ray(t_vars *vars)
 	
 			mp = my*(vars->longest_line-1)+mx;
 			ms = (vars->number_of_lines -1) * (vars->longest_line-1);
-			// dprintf(1, "1 MX: %d MY: %d  %d %d\n",mx,my,vars->number_of_lines,vars->longest_line);
 			if(mx >= 0 && mx < vars->longest_line && my >= 0 && my < vars->number_of_lines && vars->map[my][mx] == '1')
 			{
 				//hit  a wall;
@@ -258,16 +223,6 @@ void shoot_ray(t_vars *vars)
 		i+= PIXEL_WIDTH;
 		r++;
 	}
-}
-void draw_zabzoub(t_vars *vars)
-{
-    int x0 = vars->player_pos[X] + 16;
-    int y0 = vars->player_pos[Y] + 16;
-
-    int x1 = x0 + vars->pdx;
-    int y1 = y0 + vars->pdy;
-
-	draw_line(vars,x0,y0,x1,y1,0xFF0000);
 }
 
 void print_stuff(t_vars *vars)

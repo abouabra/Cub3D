@@ -1,5 +1,5 @@
 SRC =  main.c key_movement.c map_check.c info_list_stuff.c map_operation.c draw_map.c \
-		move_player.c update_frames.c rotate_player.c
+		move_player.c update_frames.c rotate_player.c mlx_stuff.c
 
 OSRC=$(SRC:.c=.o)
 
