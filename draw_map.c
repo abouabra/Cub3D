@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/03/02 19:13:00 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/03 20:13:19 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,13 @@ void shoot_ray(t_vars *vars)
 		while(j < PIXEL_WIDTH)
 		{
 			LineO = (vars->number_of_lines *64)/2 - vars->store[r]/2;
-			draw_line(vars, i+j, (vars->number_of_lines * 64)+LineO, i+j, (vars->number_of_lines * 64) + vars->store[r] + LineO, vars->wall_colors[r]);
+			int celing = LineO;
+			int floor = vars->store[r] + LineO;
+			draw_line(vars, i+j, (vars->number_of_lines * 64), i+j, (vars->number_of_lines * 64) + celing, 0x00FF00);
+			
+			draw_line(vars, i+j, (vars->number_of_lines * 64) + floor, i+j, (vars->number_of_lines * 64)*2, 0x0000FF);
+			
+			draw_line(vars, i+j, (vars->number_of_lines * 64) + LineO, i+j, (vars->number_of_lines * 64) + vars->store[r] + LineO, vars->wall_colors[r]);
 			j++;
 		}
 		i+= PIXEL_WIDTH;
