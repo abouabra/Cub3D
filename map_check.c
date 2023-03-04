@@ -6,25 +6,29 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:28:41 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/20 21:23:37 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:14:07 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft/get_next_line.h"
 
-int is_identifier(char *line)
+int is_asset_path(char *line)
 {
 	if(!ft_strncmp("NO", line, 2)
 		|| !ft_strncmp("SO", line, 2)
 		|| !ft_strncmp("WE", line, 2)
-		|| !ft_strncmp("EA", line, 2)
-		|| !ft_strncmp("F", line, 1)
+		|| !ft_strncmp("EA", line, 2))
+		return 1;
+	return 0;
+}
+int is_color(char *line)
+{
+	if(!ft_strncmp("F", line, 1)
 		|| !ft_strncmp("C", line, 1))
 		return 1;
 	return 0;
 }
-
 void	parse_data(t_vars *vars, char **map)
 {
 	char **data;
@@ -41,10 +45,16 @@ void	parse_data(t_vars *vars, char **map)
 		if(map[i][0] == ' ')
 			break;
 		(vars->number_of_lines)++;
-		if(is_identifier(map[i]))
+		if(is_asset_path(map[i]))
 		{
 			line = ft_split(map[i], ' ');
-			node = ft_new_info(line[0], line[1]);
+			node = ft_new_info(line[0], line[1],0);
+			add_info_in_back(&vars->info_head, node);
+		}
+		else if(is_color(map[i]))
+		{
+			line = ft_split(map[i], ' ');
+			node = ft_new_info(line[0], line[1],1);
 			add_info_in_back(&vars->info_head, node);
 		}
 	}

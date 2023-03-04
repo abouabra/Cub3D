@@ -6,25 +6,30 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:25:11 by abouabra          #+#    #+#             */
-/*   Updated: 2023/02/19 17:42:44 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:12:57 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft/libft.h"
+#include <stdio.h>
 
-t_info	*ft_new_info(char *id, char *data)
+t_info	*ft_new_info(char *id, char *data, int arg)
 {
 	t_info	*node;
-	int		x;
-	int		y;
-
-	x = 0;
-	y = 0;
+	char **arr;
+	
 	node = my_alloc(sizeof(t_info));
 	if (!node)
 		return (0);
 	node->id = id;
-	node->data = data;
+	if(arg)
+	{
+		arr = ft_split(data, ',');
+		node->r = ft_atoi(arr[0]);
+		node->g = ft_atoi(arr[1]);;
+		node->b = ft_atoi(arr[2]);;
+	}
 	node->next = NULL;
 	return (node);
 }
@@ -68,7 +73,7 @@ void	ft_info_clear(t_info **head)
 	}
 }
 
-char	*get_info_data(t_vars *vars, char *id)
+t_info	*get_info_data(t_vars *vars, char *id)
 {
 	t_info	*node;
 
@@ -76,7 +81,7 @@ char	*get_info_data(t_vars *vars, char *id)
 	while (node)
 	{
 		if(!ft_strncmp(node->id, id, -1))
-			return node->data;
+			return node;
 		node = node->next;
 	}
 	return (NULL);

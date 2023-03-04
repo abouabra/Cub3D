@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:05:23 by abouabra          #+#    #+#             */
-/*   Updated: 2023/03/02 19:07:28 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:14:21 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	update_frames(t_vars *vars)
 	shoot_ray(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->main_img->img, 0, 0);
 	print_stuff(vars);
+	(void) vars;
 	return 0;
 }

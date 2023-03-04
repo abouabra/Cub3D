@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 16:52:42 by ayman             #+#    #+#             */
-/*   Updated: 2023/03/02 19:27:24 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:13:16 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef struct	s_data {
 typedef struct t_info
 {
 	char			*id;
-	char			*data;
+	int r;
+	int g;
+	int b;
 	struct t_info	*next;
 }					t_info;
 
@@ -91,11 +93,11 @@ int					map_check(t_vars *vars, char *map_name);
 int					map_operation(t_vars *vars, char *map_name);
 int					close_win(t_vars *vars);
 int					key_movement(int keycode, t_vars *vars);
-t_info				*ft_new_info(char *id, char *data);
+t_info				*ft_new_info(char *id, char *data, int arg);
 t_info				*ft_last_info(t_info *node);
 void				add_info_in_back(t_info **head, t_info *node);
 void				ft_info_clear(t_info **head);
-char				*get_info_data(t_vars *vars, char *id);
+t_info				*get_info_data(t_vars *vars, char *id);
 
 void				draw_map(t_vars *vars);
 void				move_player_up(t_vars *vars);
@@ -109,5 +111,8 @@ void				print_stuff(t_vars *vars);
 int					update_frames(t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void shoot_ray(t_vars *vars);
+int	argb(int a, int r, int g, int b);
+int get_floor_color(t_vars *vars);
+int get_celling_color(t_vars *vars);
 
 #endif

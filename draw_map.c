@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/03/03 20:13:19 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:08:34 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ float calc_dist(float px, float py, float dx, float dy)
 	c = sqrt((a*a) + (b*b));
 	return c;
 }
+
 
 void shoot_ray(t_vars *vars)
 {
@@ -178,7 +179,7 @@ void shoot_ray(t_vars *vars)
 			vars->wall_colors[r] = 0x693e00;
 		}
 		if(rx >= 0 && rx < vars->longest_line*64 && ry >= 0 && ry < vars->number_of_lines*64)
-			draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry,0xFF0000);
+			draw_line(vars, vars->player_pos[X] + 16, vars->player_pos[Y] + 16, rx, ry, argb(0,255,0,0));
 		
 		ra += DR;
 		if(ra > 2 * PI)
@@ -216,12 +217,12 @@ void shoot_ray(t_vars *vars)
 		j = 0;
 		while(j < PIXEL_WIDTH)
 		{
-			LineO = (vars->number_of_lines *64)/2 - vars->store[r]/2;
+			LineO = (float) (vars->number_of_lines *64)/2 - vars->store[r]/2;
 			int celing = LineO;
 			int floor = vars->store[r] + LineO;
-			draw_line(vars, i+j, (vars->number_of_lines * 64), i+j, (vars->number_of_lines * 64) + celing, 0x00FF00);
+			draw_line(vars, i+j, (vars->number_of_lines * 64), i+j, (vars->number_of_lines * 64) + celing, get_celling_color(vars));
 			
-			draw_line(vars, i+j, (vars->number_of_lines * 64) + floor, i+j, (vars->number_of_lines * 64)*2, 0x0000FF);
+			draw_line(vars, i+j, (vars->number_of_lines * 64) + floor, i+j, (vars->number_of_lines * 64)*2, get_floor_color(vars));
 			
 			draw_line(vars, i+j, (vars->number_of_lines * 64) + LineO, i+j, (vars->number_of_lines * 64) + vars->store[r] + LineO, vars->wall_colors[r]);
 			j++;
