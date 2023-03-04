@@ -6,7 +6,7 @@
 /*   By: abouabra < abouabra@student.1337.ma >      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:36:07 by abouabra          #+#    #+#             */
-/*   Updated: 2023/03/04 18:08:34 by abouabra         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:18:49 by abouabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void shoot_ray(t_vars *vars)
 
 	disH = 100000000;
 	disV = 100000000;
-	ra = vars->pa-DR*(FOV/2);
+	ra = vars->pa-DR * ((float) FOV/2);
 	// ra = vars->pa;
 	if(ra > 2 * PI)
 		ra -= 2 * PI;
@@ -82,7 +82,7 @@ void shoot_ray(t_vars *vars)
 			yo  =  64;
 			xo  = -yo*aTan;
 		}
-		if(ra == PI || ra == 0)
+		if(ra == (float) PI || ra == 0)
 		{
 			rx = vars->player_pos[X];
 			ry = vars->player_pos[Y];
@@ -134,7 +134,7 @@ void shoot_ray(t_vars *vars)
 			xo  =  64;
 			yo  = -xo*nTan;
 		}
-		if(ra == PI || ra == 0)
+		if(ra == (float) PI || ra == 0)
 		{
 			rx = vars->player_pos[X];
 			ry = vars->player_pos[Y];
